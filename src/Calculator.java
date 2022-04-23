@@ -9,16 +9,22 @@ public class Calculator {
             double first_num = Double.parseDouble(strF[0]);
             String type = String.valueOf(strF[1]);
             double second_num = Double.parseDouble(strF[2]);
-            if (type.equals("+")) {
-                System.out.print(first_num + second_num);
-            } else if (type.equals("-")) {
-                System.out.print(first_num - second_num);
-            } else if (type.equals("*")) {
-                System.out.print(first_num * second_num);
-            } else if (type.equals("/")) {
-                System.out.print(second_num != 0 ? first_num / second_num : "Error! Division by zero");
-            } else {
-                System.out.print("Operation Error!");
+            switch (type) {
+                case "+":
+                    System.out.print(first_num + second_num);
+                    break;
+                case "-":
+                    System.out.print(first_num - second_num);
+                    break;
+                case "*":
+                    System.out.print(first_num * second_num);
+                    break;
+                case "/":
+                    System.out.print(second_num != 0 ? first_num / second_num : "Error! Division by zero");
+                    break;
+                default:
+                    System.out.print("Operation Error!");
+                    break;
             }
         }
         catch (Exception e) {
