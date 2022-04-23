@@ -32,14 +32,17 @@ public class Calculator {
         }
     }
 
-    public static String FileReaderMy(String filePath) throws FileNotFoundException {
+    public static String FileReaderMy(String filePath) throws IOException {
         FileReader fileReader = new FileReader(filePath);
         Scanner scanner = new Scanner(fileReader);
-        return scanner.nextLine();
+        String ans = scanner.nextLine();
+        fileReader.close();
+        return ans;
     }
 
     public static void FileWriterMy(String filePath, String str) throws IOException {
         FileWriter fileWriter = new FileWriter(filePath);
         fileWriter.write(str);
+        fileWriter.close();
     }
 }
