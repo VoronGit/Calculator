@@ -1,9 +1,36 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.*;
 
 public class Calculator {
     public static void main(String[] args) throws Exception {
-        String str = FileReaderMy("D:\\Users\\ab270599zra\\Desktop\\input.txt");
+        StringBuilder stringBuilder = new StringBuilder();
+        ArrayList<String> arrayList = FileReaderMy("D:\\Users\\ab270599zra\\Desktop\\input.txt");
+        for (String str : arrayList) {
+            stringBuilder.append(calcMisc(str) + "\n");
+        }
+        FileWriterMy("D:\\Users\\ab270599zra\\Desktop\\output.txt", stringBuilder.toString());
+    }
+
+    public static ArrayList<String> FileReaderMy(String filePath) throws IOException {
+        ArrayList<String> arrayList = new ArrayList<>();
+        FileReader fileReader = new FileReader(filePath);
+        Scanner scanner = new Scanner(fileReader);
+        while (scanner.hasNextLine()) {
+            arrayList.add(scanner.nextLine());
+        }
+        fileReader.close();
+        return arrayList;
+    }
+
+    public static void FileWriterMy(String filePath, String str) throws IOException {
+        FileWriter fileWriter = new FileWriter(filePath);
+        fileWriter.write(str);
+        fileWriter.close();
+    }
+
+    public static String calcMisc(String str) {
+        if (str.length() < 1) return "";
         String[] strF = str.split(" ");
         try {
             double first_num = Double.parseDouble(strF[0]);
@@ -11,38 +38,19 @@ public class Calculator {
             double second_num = Double.parseDouble(strF[2]);
             switch (type) {
                 case "+":
-                    FileWriterMy("D:\\Users\\ab270599zra\\Desktop\\output.txt", String.valueOf(first_num + second_num));
-                    break;
+                    return str + " = " + (first_num + second_num);
                 case "-":
-                    FileWriterMy("D:\\Users\\ab270599zra\\Desktop\\output.txt", String.valueOf(first_num - second_num));
-                    break;
+                    return str + " = " + (first_num - second_num);
                 case "*":
-                    FileWriterMy("D:\\Users\\ab270599zra\\Desktop\\output.txt", String.valueOf(first_num * second_num));
-                    break;
+                    return str + " = " + (first_num * second_num);
                 case "/":
-                    FileWriterMy("D:\\Users\\ab270599zra\\Desktop\\output.txt", String.valueOf(second_num != 0 ? first_num / second_num : "Error! Division by zero"));
-                    break;
+                    return str + " = " + (second_num != 0 ? first_num / second_num : "Error! Division by zero");
                 default:
-                    FileWriterMy("D:\\Users\\ab270599zra\\Desktop\\output.txt", "Operation Error!");
-                    break;
+                    return str + " = " + "Operation Error!";
             }
         }
         catch (Exception e) {
-            FileWriterMy("D:\\Users\\ab270599zra\\Desktop\\output.txt", "Error! Not number");
+            return str + " = " + "Error! Not number";
         }
-    }
-
-    public static String FileReaderMy(String filePath) throws IOException {
-        FileReader fileReader = new FileReader(filePath);
-        Scanner scanner = new Scanner(fileReader);
-        String ans = scanner.nextLine();
-        fileReader.close();
-        return ans;
-    }
-
-    public static void FileWriterMy(String filePath, String str) throws IOException {
-        FileWriter fileWriter = new FileWriter(filePath);
-        fileWriter.write(str);
-        fileWriter.close();
     }
 }
