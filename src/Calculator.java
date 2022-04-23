@@ -3,8 +3,7 @@ import java.io.*;
 
 public class Calculator {
     public static void main(String[] args) throws Exception {
-        Scanner sc = new Scanner(System.in);
-        String str = sc.nextLine();
+        String str = FileReaderMy("D:\\Users\\ab270599zra\\Desktop\\input.txt");
         String[] strF = str.split(" ");
         try {
             double first_num = Double.parseDouble(strF[0]);
@@ -25,5 +24,11 @@ public class Calculator {
         catch (Exception e) {
             System.out.print("Error! Not number");
         }
+    }
+
+    public static String FileReaderMy(String filePath) throws FileNotFoundException {
+        FileReader fileReader = new FileReader(filePath);
+        Scanner scanner = new Scanner(fileReader);
+        return scanner.nextLine();
     }
 }
